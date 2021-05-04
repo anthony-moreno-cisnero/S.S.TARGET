@@ -3,6 +3,7 @@
 	$this->load->view('sidenavPush');
 ?>
 <!-- Use any element to open the sidenav -->
+<!-- dsdsdadass -->
 <div id="main"> <!-- cotenedor de las cards -->
 	<div id="btnMenuBar" class="containerBtn" onclick="myFunction(this)">
 		<div class="bar1"></div>
