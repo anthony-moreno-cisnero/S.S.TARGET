@@ -88,4 +88,17 @@ class Dashboard extends CI_Controller {
 			//Hacer una web de error
 		}
 	}
+	public function validaReg(){
+		if ($this->input->is_ajax_request()) {
+		
+		$field	= 'nomemp, fecing, horing';
+		$table = 'datingveh';
+		$id = 'rutemp = '.$this->input->post('rut');
+			$result = $this->dashboardModel->selectDash($field,$table,$id);
+			echo json_encode($result);
+		}else{
+			show_404();
+			//Hacer una web de error
+		}
+	}
 }

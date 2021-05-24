@@ -24,8 +24,15 @@
 				return false;
 			}
 		}
-		function selectDash(){
-
+		function selectDash($field,$table,$id){
+			$this->db->select($field);
+			$this->db->where($id);
+			$query = $this->db->get($table);
+			if ($query->num_rows() > 0) {
+				return $query->result();
+			}else{
+				return false;
+			}
 		}
 		function getDash($field,$table,$id){
 			$this->db->select($field);

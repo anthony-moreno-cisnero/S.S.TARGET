@@ -11,7 +11,7 @@ $(document).ready(function () {
 function alertError(men,tit){
   toastr.error(men,tit,{
       "closeButton": true,
-      "positionClass": "toast-bottom-left",
+      "positionClass": "toast-bottom-right",
       "timeOut": "2500",
       // "preventDuplicates": true,
       "progressBar": true
@@ -20,7 +20,7 @@ function alertError(men,tit){
 function alertSuccess(men,tit){
   toastr.success(men,tit,{
       "closeButton": true,
-      "positionClass": "toast-bottom-left",
+      "positionClass": "toast-bottom-right",
       "timeOut": "2500",
       // "preventDuplicates": true,
       "progressBar": true
@@ -29,7 +29,7 @@ function alertSuccess(men,tit){
 function alertInfo(men,tit){
   toastr.info(men,tit,{
       "closeButton": true,
-      "positionClass": "toast-bottom-left",
+      "positionClass": "toast-bottom-right",
       "timeOut": "2500",
       // "preventDuplicates": true,
       "progressBar": true
@@ -38,7 +38,7 @@ function alertInfo(men,tit){
 function alertWarning(men,tit){
   toastr.warning(men,tit,{
       "closeButton": true,
-      "positionClass": "toast-bottom-left",
+     "positionClass": "toast-bottom-right",
       "timeOut": "2500",
       // "preventDuplicates": true,
       "progressBar": true
@@ -213,7 +213,9 @@ $('#formSearchId').submit(function() {
               $('#ape1').val(`${result.ape1}`);
               $('#rut').val(`${result.rut}`);
               $('#pat').val(`${result.pat}`);
-              // $('#pat').val(`${result.pat}`);
+              let tit = 'Usuario activo';
+              let men = ``;
+              alertSuccess(men,tit);
             });
         }
       }
@@ -244,3 +246,43 @@ function getEmpresas() {
     }
   });
 }
+
+$('#formEmpIngVeh').submit(function() {
+  event.preventDefault();
+  let nom1 = $('#nom1').val();
+  let ape1 = $('#ape1').val();
+  let rut = $('#rut').val();
+  let pat = $('#pat').val();
+  let empresas = $('#empresas').val();
+  let obs = $('#obs').val();
+  if (nom1 == '' || ape1 == '' || rut == '' || pat == '' || empresas == '') {
+    let tit = 'Falta información:';
+    let men = 'Los campos "Nombre, Apellido, RUT, Patente y Empresa son obligatorios."';
+    alertWarning(men,tit);
+  }else{
+     $.ajax({
+      url: 'http://localhost/S.S.TARGET/dashboard/validaReg',
+      type: 'POST',
+      data: {rut},
+      success: function(validaReg) {
+        alert(validaReg);
+        // if (validaReg == 'false') {
+        //   let tit = 'Usuario no encontrado';
+        //   let men = 'aasda';
+        //   alertWarning(men,tit);
+        // }else{
+        //   let a = JSON.parse(validaReg);
+        //   a.forEach(result => {
+        //     $('#nom1').val(`${result.nom1}`);
+        //     $('#ape1').val(`${result.ape1}`);
+        //     $('#rut').val(`${result.rut}`);
+        //     $('#pat').val(`${result.pat}`);
+        //     let tit = 'Usuarios con registro activo';
+        //     let men = `El usuario <b>${result.nom1} ${result.ape1}</b> tiene un registro sin cerrar del dia `;
+        //     alertWarning(men,tit);
+        //   });
+        // }
+      }
+    });
+  }
+});
